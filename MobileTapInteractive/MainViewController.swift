@@ -33,7 +33,7 @@ class MainViewController: UIViewController {
     lazy var videoPreviewLooper = VideoLooperView()
     
     /// Счетчик Таймера для интерактивной игры
-    var counterOfTimerForInteractiveGame = 0
+    var counterOfTimerForInteractiveGame = 30
     
     /// Таймер для интерактивной игры
     var timerForInteractiveGame = Timer()
@@ -104,9 +104,6 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         ///Настойка отображений Views
         setupViews()
-        
-        ///Изначально скрываем все индикаторы и дополнительные элементы
-        hideAllIndicatorsAndLabels()
         
         sideViewLeftThickIndicator.backgroundColor = .clear
         sideViewLeftThinIndicator.backgroundColor = .clear
@@ -181,15 +178,20 @@ class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        ///Изначально скрываем все индикаторы и дополнительные элементы
+        hideAllIndicatorsAndLabels()
+        
+        self.labelLeft.text = ""
+        
+        self.labelRight.text = ""
+        
         self.videoPreviewLooper.frame = view.bounds
         
         self.videoPreviewLooper.backgroundColor = .black
         
         self.videoPreviewLooper.showVideo(from: localFirstURL)
         
-        self.labelLeft.text = ""
-        
-        self.labelRight.text = ""
+        sleep(1)
         
         self.timerForInteractiveGame = setupTimer()
         
